@@ -1,30 +1,26 @@
-import React, { Component } from "react";
+// import { useState } from "react";
 import PropTypes from 'prop-types';
 import css from './Button.module.css';
 
-class Button extends Component {
-    state = {
-        number: 1,
+export default function Button ({onClick}) {
+  // const [number, setNumber] = useState(1);
+
+      //  const handleClick = e => { 
+      //   setNumber(number + 1); 
+      //   onClick(number + 1); 
+      // };
+
+      const handleClick = e => {  
+        onClick(); 
       };
 
-       handleClick = e => { 
-        this.setState(prevState => {
-            return {number: prevState.number + 1}; 
-        }); 
-        this.props.onClick(this.state.number + 1); 
-      };
-
-  render () {
     return (
-        <button type="button" className={css.button} onClick={this.handleClick}>
+        <button type="button" className={css.button} onClick={handleClick}>
           Load more        
         </button>
     )
-  }
 };
   
 Button.propTypes = {
     onClick: PropTypes.func.isRequired,
 };
-
-export default Button;

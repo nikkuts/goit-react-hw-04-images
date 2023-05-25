@@ -1,26 +1,29 @@
-import { useState } from "react";
+import React, { Component } from "react";
 import ImageGallery from "./ImageGallery/ImageGallery";
 import Searchbar from './Searchbar/Searchbar';
 import Button from './Button/Button';
 import css from './App.module.css';
 
-export default function App () {
-  const [query, setQuery] = useState('');
-  const [number, setNumber] = useState(1);
-
-  const handleFormSubmit = query => {
-    setQuery(query);
-    setNumber(1);
-  };
-  
-  const handleButtonClick = () => {
-    setNumber(number + 1);
+class App extends Component {
+  state = {
+    query: '',
+    number: 1,
   };
 
+handleFormSubmit = query => {
+  this.setState({query});
+};
+
+handleButtonClick = number => {
+  this.setState({number});
+};
+
+  render () {
+    const {query, number} = this.state;
     return (
       <div className={css.app}>
         <Searchbar 
-        onSubmit={handleFormSubmit}
+        onSubmit={this.handleFormSubmit}
         />
         <ImageGallery 
         query={query}
@@ -28,8 +31,11 @@ export default function App () {
         />
         {query !== '' && 
         <Button 
-        onClick={handleButtonClick}
+        onClick={this.handleButtonClick}
         />}
       </div>
     );
+  }
 };
+
+export default App;
